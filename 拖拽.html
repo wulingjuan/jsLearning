@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background:#f00;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        var oBox = document.getElementById('box');
+        drag(oBox);
+
+        function drag(obj){
+            var flag = false;
+            obj.onmousedown = function (e) {
+                flag = true;
+            }
+            document.onmousemove = function (e) {
+                var e = e || window.event;
+                var x = e.clientX;
+                var y = e.clientY;
+                if (flag) {
+                    oBox.style.left = x - 50 + "px";
+                    oBox.style.top = y - 50 + "px";
+                }
+            }
+            obj.onmouseup = function (e) {
+                flag = false;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        .container{
+            position: relative;
+            margin:200px auto;
+            width: 200px;
+            height: 200px;
+            perspective: 500;
+            border: 1px solid #ddd;
+            -webkit-perspective: 500;
+            transform-style: preserve-3d;
+        }
+        .container{
+            -webkit-transition: 3s;
+        }
+        .front,.back{
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            text-align: center;
+            line-height: 200px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            backface-visibility: hidden;
+            cursor: default;
+        }
+        .front{
+            z-index: 2;
+            background: deeppink;
+        }
+        .back{
+            transform: rotateY(180deg);
+            z-index: 1;
+            background: greenyellow;
+            /* display: none; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="front">一等奖</div>
+        <div class="back">一个美眉</div>
+    </div>
+    <script>
+        $(".front").click(function(){
+            $(".container").css({ "transform": "rotateY(180deg)" });
+        });
+        $(".back").click(function(){
+            $(".container").css({ "transform": "rotateY(360deg)" });
+        })
+    </script>
+</body>
+</html>

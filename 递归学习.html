@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var lottery = {
+            index:0,
+            fn:function(){
+                lottery.index ++;
+                if(lottery.index > 10){
+                    return;
+                }
+                console.log(lottery.index)
+                lottery.fn();
+            }
+        }
+        lottery.fn();
+    </script>
+</body>
+</html>

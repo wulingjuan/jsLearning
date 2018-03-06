@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            margin: 300px auto;
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            float: left;
+            cursor: default;
+        }
+        
+        .highlight{
+            color: #fff;
+            background:#0f0;
+            opacity: 0.4;
+        }
+        #btn{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            float: left;
+            cursor: default;
+            color: #fff;
+            background: deeppink;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" data-index=1>iphoneX</div>
+        <div class="box" data-index="2">mi2s</div>
+        <div class="box" data-index="3">小米平衡车</div>
+        <div class="box" data-index="8">100元充值卡</div>
+        <div id="btn">抽奖</div>
+        <div class="box" data-index="4">谢谢参与</div>
+        <div class="box" data-index="7">100M流量</div>
+        <div class="box" data-index="6">20元京东抵用券</div>
+        <div class="box" data-index="5">2元现金</div>
+    </div>
+    <script>
+        var index = 0;
+        var count = 0;
+        var timer = null;
+        var flag = false;
+        var prizeNum = Math.ceil(Math.random()*8);
+        var speed = 50;
+        function animate(){
+            var lottery = "";
+            index++;
+            count++;
+            if (index == 9) index = 1;
+            $(".box").removeClass("highlight");
+            $('.box').each(function () {
+                if ($(this).attr("data-index") == index) {
+                    $(this).addClass("highlight");
+                }
+                if($(this).attr("data-index") == prizeNum){
+                    lottery = $(this).text();
+                }
+            });
+            if(count > 32 + prizeNum -5 && count < 32+prizeNum){
+                speed += 100;
+                timer = setTimeout(animate,speed);
+            }
+            else if(count >= 32 + prizeNum) {
+                flag = true;
+                if(lottery != "谢谢参与"){
+                    alert("恭喜你,获得" + lottery)
+                }else{
+                    alert(lottery)
+                }
+            }
+            else{
+                timer = setTimeout(animate, speed);
+            }
+        }
+        // 递归
+        $("#btn").click(function(){
+            flag ? alert("您已经抽过奖了！") : timer = setTimeout(animate, speed)
+        })
+        $(".box").click(function(){
+            $(this).addClass("overturn");
+        })
+    </script>
+</body>
+</html>
